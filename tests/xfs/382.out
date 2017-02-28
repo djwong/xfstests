@@ -2,4 +2,38 @@ QA output created by 382
 Format and populate
 Find symlink remote block
 Fuzz symlink remote block
+online re-scrub (1) with magic = zeroes.
+online re-scrub (1) with magic = ones.
+online re-scrub (1) with magic = firstbit.
+online re-scrub (1) with magic = middlebit.
+online re-scrub (1) with magic = lastbit.
+online re-scrub (1) with magic = add.
+online re-scrub (1) with magic = sub.
+online re-scrub (1) with magic = random.
+online re-scrub (1) with uuid = zeroes.
+online re-scrub (1) with uuid = ones.
+online re-scrub (1) with uuid = firstbit.
+online re-scrub (1) with uuid = middlebit.
+online re-scrub (1) with uuid = lastbit.
+online re-scrub (1) with uuid = random.
+online re-scrub (1) with bno = zeroes.
+online re-scrub (1) with bno = ones.
+online re-scrub (1) with bno = firstbit.
+online re-scrub (1) with bno = middlebit.
+online re-scrub (1) with bno = lastbit.
+online re-scrub (1) with bno = add.
+online re-scrub (1) with bno = sub.
+online re-scrub (1) with bno = random.
+scrub didn't fail with lsn = zeroes.
+scrub didn't fail with lsn = ones.
+online re-scrub (1) with lsn = firstbit.
+online re-scrub (1) with lsn = middlebit.
+scrub didn't fail with lsn = lastbit.
+scrub didn't fail with lsn = add.
+scrub didn't fail with lsn = sub.
+online re-scrub (1) with lsn = random.
+scrub didn't fail with data = ones.
+scrub didn't fail with data = firstbit.
+scrub didn't fail with data = middlebit.
+scrub didn't fail with data = lastbit.
 Done fuzzing symlink remote block
