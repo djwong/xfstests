@@ -1,4 +1,55 @@
 QA output created by 359
 Format and populate
 Fuzz bnobt recs
+offline re-scrub (1) with numrecs = zeroes.
+re-repair failed (1) with numrecs = zeroes.
+offline re-scrub (1) with numrecs = middlebit.
+re-repair failed (1) with numrecs = middlebit.
+offline re-scrub (1) with numrecs = lastbit.
+re-repair failed (1) with numrecs = lastbit.
+online repair failed (5) with rightsib = ones.
+offline re-scrub (1) with rightsib = ones.
+online re-scrub (1) with rightsib = ones.
+re-repair failed (1) with rightsib = ones.
+offline re-scrub (1) with rightsib = lastbit.
+re-repair failed (1) with rightsib = lastbit.
+scrub didn't fail with lsn = zeroes.
+scrub didn't fail with lsn = ones.
+scrub didn't fail with lsn = firstbit.
+scrub didn't fail with lsn = middlebit.
+scrub didn't fail with lsn = lastbit.
+scrub didn't fail with lsn = add.
+offline re-scrub (1) with lsn = add.
+scrub didn't fail with lsn = sub.
+scrub didn't fail with lsn = random.
+online repair failed (4) with recs[1].startblock = lastbit.
+offline re-scrub (1) with recs[1].startblock = lastbit.
+online re-scrub (1) with recs[1].startblock = lastbit.
+re-repair failed (1) with recs[1].startblock = lastbit.
+offline re-scrub (1) with recs[1].blockcount = zeroes.
+re-repair failed (1) with recs[1].blockcount = zeroes.
+offline re-scrub (1) with recs[1].blockcount = ones.
+re-repair failed (1) with recs[1].blockcount = ones.
+online repair failed (4) with recs[1].blockcount = firstbit.
+offline re-scrub (1) with recs[1].blockcount = firstbit.
+re-mount failed (32) with recs[1].blockcount = firstbit.
+re-repair failed (1) with recs[1].blockcount = firstbit.
+online repair failed (4) with recs[1].blockcount = middlebit.
+offline re-scrub (1) with recs[1].blockcount = middlebit.
+re-mount failed (32) with recs[1].blockcount = middlebit.
+re-repair failed (1) with recs[1].blockcount = middlebit.
+offline re-scrub (1) with recs[1].blockcount = lastbit.
+re-repair failed (1) with recs[1].blockcount = lastbit.
+online repair failed (4) with recs[1].blockcount = add.
+offline re-scrub (1) with recs[1].blockcount = add.
+online re-scrub (1) with recs[1].blockcount = add.
+re-repair failed (1) with recs[1].blockcount = add.
+online repair failed (4) with recs[1].blockcount = sub.
+offline re-scrub (1) with recs[1].blockcount = sub.
+online re-scrub (1) with recs[1].blockcount = sub.
+re-repair failed (1) with recs[1].blockcount = sub.
+online repair failed (4) with recs[1].blockcount = random.
+offline re-scrub (1) with recs[1].blockcount = random.
+re-mount failed (32) with recs[1].blockcount = random.
+re-repair failed (1) with recs[1].blockcount = random.
 Done fuzzing bnobt recs
