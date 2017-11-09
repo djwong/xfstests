@@ -140,12 +140,15 @@ _scratch_xfs_db -r -c "inode $inum_2" -c "a a.bmx[0].startblock" -c print  \
 	| perl -ne '
 s/,secure//;
 s/,parent//;
+s/,pad2//;
 s/info.hdr/info/;
 /hdr.info.crc/ && next;
 /hdr.info.bno/ && next;
 /hdr.info.uuid/ && next;
 /hdr.info.lsn/ && next;
 /hdr.info.owner/ && next;
+/hdr.info.pad/ && next;
+/hdr.pad1/ && next;
 s/^(hdr.info.magic =) 0x3bee/\1 0xfbee/;
 s/^(hdr.firstused =) (\d+)/\1 FIRSTUSED/;
 s/^(hdr.freemap\[0-2] = \[base,size]).*/\1 [FREEMAP..]/;
