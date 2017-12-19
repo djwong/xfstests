@@ -701,3 +701,8 @@ _scratch_xfs_set_sb_field()
 {
 	_scratch_xfs_set_metadata_field "$1" "$2" "sb 0"
 }
+
+_scratch_agcount()
+{
+	xfs_info "${SCRATCH_MNT}" | grep "agcount=" | sed -e 's/^.*agcount=\([0-9]*\),.*$/\1/g'
+}

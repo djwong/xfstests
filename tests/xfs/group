@@ -442,3 +442,4 @@
 442 auto stress clone quota
 443 auto quick ioctl fsr
 709 auto quick
+903 mount auto quick stress

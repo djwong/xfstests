@@ -1,0 +1,108 @@
+#! /bin/bash
+# FS QA Test No. 903
+#
+# Test that frozen filesystems are relatively clean and not full of errors.
+# Prior to freezing a filesystem, we want to minimize the amount of recovery
+# that will have to happen if the system goes down while the fs is frozen.
+# Therefore, start up fsstress and cycle through a few freeze/thaw cycles
+# to ensure that nothing blows up when we try to do this.
+#
+# Unfortunately the log will probably still be dirty, so we can't do much
+# about enforcing a clean repair -n run.
+#
+#-----------------------------------------------------------------------
+# Copyright (c) 2000-2002 Silicon Graphics, Inc.  All Rights Reserved.
+# Copyright (c) 2018 Oracle.  All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it would be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write the Free Software Foundation,
+# Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+#-----------------------------------------------------------------------
+#
+
+seq=`basename $0`
+seqres=$RESULT_DIR/$seq
+echo "QA output created by $seq"
+
+here=`pwd`
+tmp=/tmp/$$
+status=1
+trap "_cleanup; rm -f $tmp.*; exit \$status" 0 1 2 3 15
+
+_cleanup()
+{
+	# Make sure we thaw the fs before we unmount or else we remove the
+	# mount without actually deactivating the filesystem(!)
+	$XFS_IO_PROG -x -c "thaw" $SCRATCH_MNT 2> /dev/null
+	echo "*** unmount"
+	_scratch_unmount 2>/dev/null
+}
+
+# get standard environment, filters and checks
+. ./common/rc
+. ./common/filter
+. ./common/xfs
+
+# real QA test starts here
+_supported_fs xfs
+_supported_os Linux
+
+_require_scratch
+
+echo "*** init FS"
+
+rm -f $seqres.full
+echo "*** MKFS ***" >>$seqres.full
+echo "" >>$seqres.full
+_scratch_mkfs_xfs >>$seqres.full 2>&1 || _fail "mkfs failed"
+_scratch_mount >>$seqres.full 2>&1 || _fail "mount failed"
+
+echo "*** test"
+
+for l in 0 1 2 3 4
+do
+	echo "    *** test $l"
+	FSSTRESS_ARGS=`_scale_fsstress_args -d $SCRATCH_MNT -n 1000 $FSSTRESS_AVOID`
+	$FSSTRESS_PROG  $FSSTRESS_ARGS >>$seqres.full
+
+	$XFS_IO_PROG -x -c 'freeze' $SCRATCH_MNT
+
+	# Log will probably be dirty after the freeze, record state
+	echo "" >>$seqres.full
+	echo "*** xfs_logprint ***" >>$seqres.full
+	echo "" >>$seqres.full
+	log=clean
+	_scratch_xfs_logprint -tb 2>&1 | tee -a $seqres.full \
+		| head | grep -q "<CLEAN>" || log=dirty
+
+	# Are there CoW extents?
+	for ag in $(seq 0 $(_scratch_agcount)); do
+		_scratch_xfs_db -f -c "agf $ag" -c "addr refcntroot" -c "btdump" | grep '^[0-9]*:' | sed -e 's/^.*:.\([,0-9]*\).$/\1/g' | awk -F ',' '{if ($4 == 1) { printf("'"$ag"'/%s\n", $0); } }'
+	done
+
+	# Fail if repair complains and the log is clean
+	echo "" >>$seqres.full
+	echo "*** XFS_REPAIR -n ***" >>$seqres.full
+	echo "" >>$seqres.full
+	_scratch_xfs_repair -f -n >> $seqres.full 2>&1
+
+	if [ $? -ne 0 ] && [ "$log" = "clean" ]; then
+		_fail "xfs_repair failed"
+	fi
+
+	$XFS_IO_PROG -x -c 'thaw' $SCRATCH_MNT
+done
+
+echo "*** done"
+status=0
+exit 0
