@@ -106,7 +106,7 @@ xfs_growfs $tmpdir  | growfs_filter
 
 # and double-check the new geometry
 echo "=== xfs_info ==="
-xfs_info $tmpdir | growfs_filter
+$XFS_INFO_PROG $tmpdir | growfs_filter
 
 # _cleanup cleans up for us
 
