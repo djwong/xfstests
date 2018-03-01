@@ -184,7 +184,7 @@ __fuzz_notify() {
 # Fuzz one field of some piece of metadata.
 # First arg is the field name
 # Second arg is the fuzz verb (ones, zeroes, random, add, sub...)
-# Third arg is the repair mode (online, offline, both)
+# Third arg is the repair mode (online, offline, both, none)
 __scratch_xfs_fuzz_field_test() {
 	field="$1"
 	fuzzverb="$2"
@@ -205,12 +205,14 @@ __scratch_xfs_fuzz_field_test() {
 	if [ $res -eq 0 ]; then
 		# Try an online scrub unless we're fuzzing ag 0's sb,
 		# which scrub doesn't know how to fix.
-		echo "++ Online scrub"
-		if [ "$1" != "sb 0" ]; then
-			_scratch_scrub -n -a 1 -e continue 2>&1
-			res=$?
-			test $res -eq 0 && \
-				(>&2 echo "scrub didn't fail with ${field} = ${fuzzverb}.")
+		if [ "${repair}" != "none" ]; then
+			echo "++ Online scrub"
+			if [ "$1" != "sb 0" ]; then
+				_scratch_scrub -n -a 1 -e continue 2>&1
+				res=$?
+				test $res -eq 0 && \
+					(>&2 echo "scrub didn't fail with ${field} = ${fuzzverb}.")
+			fi
 		fi
 
 		# Try fixing the filesystem online?!
@@ -237,11 +239,13 @@ __scratch_xfs_fuzz_field_test() {
 	fi
 
 	# See if repair finds a clean fs
-	echo "+ Make sure error is gone (offline)"
-        _scratch_xfs_repair -n 2>&1
-	res=$?
-	test $res -ne 0 && \
-		(>&2 echo "offline re-scrub ($res) with ${field} = ${fuzzverb}.")
+	if [ "${repair}" != "none" ]; then
+		echo "+ Make sure error is gone (offline)"
+		_scratch_xfs_repair -n 2>&1
+		res=$?
+		test $res -ne 0 && \
+			(>&2 echo "offline re-scrub ($res) with ${field} = ${fuzzverb}.")
+	fi
 
 	# See if scrub finds a clean fs
 	echo "+ Make sure error is gone (online)"
@@ -250,12 +254,14 @@ __scratch_xfs_fuzz_field_test() {
 	if [ $res -eq 0 ]; then
 		# Try an online scrub unless we're fuzzing ag 0's sb,
 		# which scrub doesn't know how to fix.
-		echo "++ Online scrub"
-		if [ "$1" != "sb 0" ]; then
-			_scratch_scrub -n -e continue 2>&1
-			res=$?
-			test $res -ne 0 && \
-				(>&2 echo "online re-scrub ($res) with ${field} = ${fuzzverb}.")
+		if [ "${repair}" != "none" ]; then
+			echo "++ Online scrub"
+			if [ "$1" != "sb 0" ]; then
+				_scratch_scrub -n -e continue 2>&1
+				res=$?
+				test $res -ne 0 && \
+					(>&2 echo "online re-scrub ($res) with ${field} = ${fuzzverb}.")
+			fi
 		fi
 
 		# Try modifying the filesystem again!
