@@ -1,6 +1,24 @@
 QA output created by 1389
 Format and populate
 Fuzz AGFL
+re-repair failed (1) with lsn = add.
+re-repair failed (1) with lsn = random.
+re-repair failed (1) with crc = zeroes.
+re-repair failed (1) with crc = ones.
+re-repair failed (1) with crc = firstbit.
+re-repair failed (1) with crc = middlebit.
+re-repair failed (1) with crc = lastbit.
+re-repair failed (1) with crc = add.
+re-repair failed (1) with crc = sub.
+re-repair failed (1) with crc = random.
 Done fuzzing AGFL
 Fuzz AGFL flfirst
+re-repair failed (1) with bno[14] = zeroes.
+re-repair failed (1) with bno[14] = ones.
+re-repair failed (1) with bno[14] = firstbit.
+re-repair failed (1) with bno[14] = middlebit.
+re-repair failed (1) with bno[14] = lastbit.
+re-repair failed (1) with bno[14] = add.
+re-repair failed (1) with bno[14] = sub.
+re-repair failed (1) with bno[14] = random.
 Done fuzzing AGFL flfirst

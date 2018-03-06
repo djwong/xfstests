@@ -2,4 +2,37 @@ QA output created by 1403
 Format and populate
 Find symlink remote block
 Fuzz symlink remote block
+re-repair failed (1) with offset = ones.
+re-repair failed (1) with offset = firstbit.
+re-repair failed (1) with offset = middlebit.
+re-repair failed (1) with offset = lastbit.
+re-repair failed (1) with offset = add.
+re-repair failed (1) with offset = sub.
+re-repair failed (1) with offset = random.
+re-repair failed (1) with bytes = zeroes.
+re-repair failed (1) with bytes = ones.
+re-repair failed (1) with bytes = firstbit.
+re-repair failed (1) with bytes = middlebit.
+re-repair failed (1) with bytes = lastbit.
+re-repair failed (1) with bytes = add.
+re-repair failed (1) with bytes = sub.
+re-repair failed (1) with bytes = random.
+re-repair failed (1) with crc = zeroes.
+re-repair failed (1) with crc = ones.
+re-repair failed (1) with crc = firstbit.
+re-repair failed (1) with crc = middlebit.
+re-repair failed (1) with crc = lastbit.
+re-repair failed (1) with crc = add.
+re-repair failed (1) with crc = sub.
+re-repair failed (1) with crc = random.
+re-repair failed (1) with owner = zeroes.
+re-repair failed (1) with owner = ones.
+re-repair failed (1) with owner = firstbit.
+re-repair failed (1) with owner = middlebit.
+re-repair failed (1) with owner = lastbit.
+re-repair failed (1) with owner = add.
+re-repair failed (1) with owner = sub.
+re-repair failed (1) with owner = random.
+re-repair failed (1) with data = zeroes.
+re-repair failed (1) with data = random.
 Done fuzzing symlink remote block

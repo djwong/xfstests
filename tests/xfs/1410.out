@@ -2,4 +2,57 @@ QA output created by 1410
 Format and populate
 Find freeindex-format dir block
 Fuzz freeindex-format dir block
+re-repair failed (1) with fhdr.hdr.magic = zeroes.
+re-repair failed (1) with fhdr.hdr.magic = ones.
+re-repair failed (1) with fhdr.hdr.magic = firstbit.
+re-repair failed (1) with fhdr.hdr.magic = middlebit.
+re-repair failed (1) with fhdr.hdr.magic = lastbit.
+re-repair failed (1) with fhdr.hdr.magic = add.
+re-repair failed (1) with fhdr.hdr.magic = sub.
+re-repair failed (1) with fhdr.hdr.magic = random.
+re-repair failed (1) with fhdr.hdr.bno = zeroes.
+re-repair failed (1) with fhdr.hdr.bno = ones.
+re-repair failed (1) with fhdr.hdr.bno = firstbit.
+re-repair failed (1) with fhdr.hdr.bno = middlebit.
+re-repair failed (1) with fhdr.hdr.bno = lastbit.
+re-repair failed (1) with fhdr.hdr.bno = add.
+re-repair failed (1) with fhdr.hdr.bno = sub.
+re-repair failed (1) with fhdr.hdr.bno = random.
+re-repair failed (1) with fhdr.hdr.uuid = zeroes.
+re-repair failed (1) with fhdr.hdr.uuid = ones.
+re-repair failed (1) with fhdr.hdr.uuid = firstbit.
+re-repair failed (1) with fhdr.hdr.uuid = middlebit.
+re-repair failed (1) with fhdr.hdr.uuid = lastbit.
+re-repair failed (1) with fhdr.hdr.uuid = random.
+re-repair failed (1) with fhdr.hdr.owner = zeroes.
+re-repair failed (1) with fhdr.hdr.owner = ones.
+re-repair failed (1) with fhdr.hdr.owner = firstbit.
+re-repair failed (1) with fhdr.hdr.owner = middlebit.
+re-repair failed (1) with fhdr.hdr.owner = lastbit.
+re-repair failed (1) with fhdr.hdr.owner = add.
+re-repair failed (1) with fhdr.hdr.owner = sub.
+re-repair failed (1) with fhdr.hdr.owner = random.
+re-repair failed (1) with fhdr.firstdb = ones.
+re-repair failed (1) with fhdr.firstdb = firstbit.
+re-repair failed (1) with fhdr.firstdb = middlebit.
+re-repair failed (1) with fhdr.firstdb = lastbit.
+re-repair failed (1) with fhdr.firstdb = add.
+re-repair failed (1) with fhdr.firstdb = sub.
+re-repair failed (1) with fhdr.firstdb = random.
+re-repair failed (1) with fhdr.nvalid = zeroes.
+re-repair failed (1) with fhdr.nvalid = ones.
+re-repair failed (1) with fhdr.nvalid = firstbit.
+re-repair failed (1) with fhdr.nvalid = middlebit.
+re-repair failed (1) with fhdr.nvalid = lastbit.
+re-repair failed (1) with fhdr.nvalid = add.
+re-repair failed (1) with fhdr.nvalid = sub.
+re-repair failed (1) with fhdr.nvalid = random.
+re-repair failed (1) with fhdr.nused = zeroes.
+re-repair failed (1) with fhdr.nused = ones.
+re-repair failed (1) with fhdr.nused = firstbit.
+re-repair failed (1) with fhdr.nused = middlebit.
+re-repair failed (1) with fhdr.nused = lastbit.
+re-repair failed (1) with fhdr.nused = add.
+re-repair failed (1) with fhdr.nused = sub.
+re-repair failed (1) with fhdr.nused = random.
 Done fuzzing freeindex-format dir block
